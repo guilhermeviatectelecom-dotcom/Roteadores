@@ -1,1 +1,1076 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <title>Capacidade de Roteadores - ViaTec</title>
+
+  <style>
+    :root {
+      --azul: #0066cc;
+      --azul-escuro: #003f82;
+      --azul-claro: #dbeafe;
+      --verde: #16a34a;
+      --verde-escuro: #15803d;
+      --verde-claro: #dcfce7;
+      --cinza-bg: #f3f6fb;
+      --cinza-card: #ffffff;
+      --cinza-texto: #334155;
+      --cinza-fraco: #64748b;
+      --cinza-borda: #dbe3ef;
+      --vermelho: #dc2626;
+      --amarelo: #f59e0b;
+      --amarelo-claro: #fff7ed;
+      --sombra: 0 10px 30px rgba(15, 23, 42, 0.10);
+      --sombra-suave: 0 5px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cinza-bg);
+      color: var(--cinza-texto);
+      line-height: 1.5;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--azul), var(--azul-escuro));
+      color: white;
+      padding: 34px 18px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      max-width: 850px;
+      margin: 0 auto;
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 22px 16px 40px;
+    }
+
+    .alerta {
+      background: var(--amarelo-claro);
+      border: 1px solid #fed7aa;
+      border-left: 6px solid var(--amarelo);
+      color: #7c2d12;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: var(--cinza-card);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--sombra);
+      border: 1px solid var(--cinza-borda);
+    }
+
+    .card h3 {
+      color: var(--azul-escuro);
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .toolbar {
+      background: white;
+      border: 1px solid var(--cinza-borda);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--sombra);
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      border: 1px solid var(--cinza-borda);
+      border-radius: 12px;
+      padding: 13px 14px;
+      font-size: 15px;
+      outline: none;
+      background: white;
+      color: var(--cinza-texto);
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--azul);
+      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.13);
+    }
+
+    .table-wrapper {
+      background: white;
+      border-radius: 18px;
+      box-shadow: var(--sombra);
+      border: 1px solid var(--cinza-borda);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: var(--azul-escuro);
+      color: white;
+    }
+
+    th,
+    td {
+      padding: 13px 12px;
+      text-align: left;
+      font-size: 14px;
+      border-bottom: 1px solid var(--cinza-borda);
+      vertical-align: middle;
+    }
+
+    th {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    .foto-cell {
+      width: 95px;
+    }
+
+    .foto-equipamento {
+      width: 78px;
+      height: 58px;
+      object-fit: contain;
+      background: #f8fafc;
+      border: 1px solid var(--cinza-borda);
+      border-radius: 12px;
+      padding: 4px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .foto-equipamento:hover {
+      transform: scale(1.06);
+      box-shadow: var(--sombra-suave);
+    }
+
+    .modelo-box {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .modelo-box strong {
+      color: #0f172a;
+    }
+
+    .modelo-box small {
+      color: var(--cinza-fraco);
+      font-size: 12px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .tag-zte {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .tag-tplink {
+      background: #ccfbf1;
+      color: #0f766e;
+    }
+
+    .tag-mikrotik {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+
+    .tag-intelbras {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .mega {
+      font-weight: bold;
+      color: var(--verde);
+      white-space: nowrap;
+    }
+
+    .maximo {
+      font-weight: bold;
+      color: var(--azul);
+      white-space: nowrap;
+    }
+
+    .baixo {
+      color: var(--vermelho);
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .obs {
+      max-width: 340px;
+    }
+
+    .legenda {
+      background: white;
+      border: 1px solid var(--cinza-borda);
+      border-radius: 16px;
+      box-shadow: var(--sombra);
+      margin-top: 20px;
+      padding: 18px;
+    }
+
+    .legenda h2 {
+      color: var(--azul-escuro);
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .legenda ul {
+      padding-left: 20px;
+    }
+
+    .legenda li {
+      margin-bottom: 6px;
+    }
+
+    .rodape {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    .sem-resultados {
+      text-align: center;
+      padding: 24px;
+      display: none;
+      color: #64748b;
+      font-weight: bold;
+    }
+
+    .modal-foto {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .modal-foto.ativo {
+      display: flex;
+    }
+
+    .modal-conteudo {
+      background: white;
+      border-radius: 18px;
+      width: min(720px, 96vw);
+      max-height: 92vh;
+      padding: 18px;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      animation: abrirModal 0.18s ease;
+    }
+
+    @keyframes abrirModal {
+      from {
+        transform: scale(0.96);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .modal-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .modal-topo h2 {
+      color: var(--azul-escuro);
+      font-size: 20px;
+    }
+
+    .fechar-modal {
+      border: none;
+      background: #fee2e2;
+      color: #991b1b;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .fechar-modal:hover {
+      background: #fecaca;
+    }
+
+    .modal-conteudo img {
+      width: 100%;
+      max-height: 65vh;
+      object-fit: contain;
+      background: #f8fafc;
+      border-radius: 14px;
+      border: 1px solid var(--cinza-borda);
+      padding: 10px;
+    }
+
+    .modal-dica {
+      margin-top: 10px;
+      color: var(--cinza-fraco);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .botao-imprimir {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      background: var(--verde);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 16px;
+      box-shadow: var(--sombra-suave);
+    }
+
+    .botao-imprimir:hover {
+      background: var(--verde-escuro);
+    }
+
+    @media (max-width: 980px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody tr {
+        background: white;
+        margin: 12px;
+        border: 1px solid var(--cinza-borda);
+        border-radius: 16px;
+        padding: 12px;
+        box-shadow: var(--sombra-suave);
+      }
+
+      tbody tr:hover {
+        background: white;
+      }
+
+      td {
+        border-bottom: none;
+        padding: 8px 4px;
+        font-size: 14px;
+      }
+
+      td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: bold;
+        color: var(--azul-escuro);
+        margin-bottom: 2px;
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .foto-cell {
+        width: 100%;
+      }
+
+      .foto-cell::before {
+        display: none;
+      }
+
+      .foto-equipamento {
+        width: 100%;
+        height: 145px;
+        margin-bottom: 4px;
+      }
+
+      .obs {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      header h1 {
+        font-size: 24px;
+      }
+
+      header p {
+        font-size: 14px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 16px 10px 30px;
+      }
+
+      .modal-conteudo {
+        padding: 14px;
+      }
+
+      .modal-topo h2 {
+        font-size: 17px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      header {
+        background: white;
+        color: black;
+        padding: 10px;
+      }
+
+      .toolbar,
+      .cards,
+      .alerta,
+      .rodape,
+      .botao-imprimir,
+      .modal-foto {
+        display: none !important;
+      }
+
+      .container {
+        max-width: 100%;
+        padding: 0;
+      }
+
+      .table-wrapper,
+      .legenda {
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+
+      thead {
+        background: #ddd;
+        color: black;
+      }
+
+      th,
+      td {
+        font-size: 10px;
+        padding: 6px;
+      }
+
+      .foto-equipamento {
+        width: 55px;
+        height: 42px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Capacidade de Roteadores e ONTs</h1>
+    <p>
+      Consulta rápida para vendedores e técnicos verificarem qual plano de internet é recomendado para cada equipamento.
+    </p>
+  </header>
+
+  <main class="container">
+    <div class="alerta">
+      <strong>Atenção:</strong>
+      os valores abaixo são recomendações práticas. A velocidade real pode variar conforme Wi-Fi, distância,
+      interferência, quantidade de dispositivos, cabo, PPPoE, NAT, firewall e configuração do equipamento.
+    </div>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Até 100 mega</h3>
+        <p>Equipamentos Fast Ethernet ou Wi-Fi 2.4 GHz.</p>
+      </div>
+
+      <div class="card">
+        <h3>200 a 500 mega</h3>
+        <p>Equipamentos Gigabit com Wi-Fi 5 dual band.</p>
+      </div>
+
+      <div class="card">
+        <h3>600 a 800 mega</h3>
+        <p>Preferencialmente roteadores Wi-Fi 6 AX1500 ou superior.</p>
+      </div>
+
+      <div class="card">
+        <h3>800 mega a 1 giga</h3>
+        <p>Equipamentos AX1800, AX3000 ou uso via cabo Gigabit.</p>
+      </div>
+    </section>
+
+    <button class="botao-imprimir" type="button" onclick="window.print()">
+      Imprimir / Salvar em PDF
+    </button>
+
+    <section class="toolbar">
+      <input
+        type="text"
+        id="busca"
+        placeholder="Buscar por modelo. Ex: AX3000, Deco, Intelbras, ZTE..."
+      />
+
+      <select id="filtroLinha">
+        <option value="todos">Todas as linhas</option>
+        <option value="ZTE">ZTE</option>
+        <option value="TP-Link">TP-Link</option>
+        <option value="MikroTik">MikroTik</option>
+        <option value="Intelbras">Intelbras</option>
+      </select>
+    </section>
+
+    <section class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>Linha</th>
+            <th>Modelo</th>
+            <th>Tecnologia</th>
+            <th>Portas</th>
+            <th>Recomendado até</th>
+            <th>Máximo aceitável</th>
+            <th>Observação</th>
+          </tr>
+        </thead>
+
+        <tbody id="corpoTabela">
+          <tr data-linha="ZTE" data-modelo="AX3000 H3601PE ZTE Wi-Fi 6 AX3000">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/zte-h3601pe.jpg"
+                alt="ZTE AX3000 H3601PE"
+                data-titulo="ZTE AX3000 H3601PE"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>AX3000 H3601PE</strong>
+                <small>Roteador Wi-Fi 6</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Wi-Fi 6 AX3000</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">800 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">1 giga</span></td>
+            <td data-label="Observação" class="obs">Excelente para planos altos. Para melhor resultado, usar 5 GHz ou cabo.</td>
+          </tr>
+
+          <tr data-linha="ZTE" data-modelo="AX1500 ZXHN H3601N ZTE Wi-Fi 6 AX1500">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/zte-h3601n.jpg"
+                alt="ZTE AX1500 ZXHN H3601N"
+                data-titulo="ZTE AX1500 ZXHN H3601N"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>AX1500 ZXHN H3601N</strong>
+                <small>Roteador Wi-Fi 6</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Wi-Fi 6 AX1500</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">600 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">800 mega</span></td>
+            <td data-label="Observação" class="obs">Boa opção para cliente residencial com plano médio ou alto.</td>
+          </tr>
+
+          <tr data-linha="ZTE" data-modelo="H199A ZTE Wi-Fi 5 AC1200">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/zte-h199a.jpg"
+                alt="ZTE H199A"
+                data-titulo="ZTE H199A"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>H199A</strong>
+                <small>Roteador Wi-Fi 5</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Wi-Fi 5 AC1200</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
+            <td data-label="Observação" class="obs">Bom roteador AC. Para planos acima de 500 mega, preferir Wi-Fi 6.</td>
+          </tr>
+
+          <tr data-linha="ZTE" data-modelo="ONT ZXHN F670L ZTE Wi-Fi 5 AC1200">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/zte-f670l.jpg"
+                alt="ZTE ONT ZXHN F670L"
+                data-titulo="ZTE ONT ZXHN F670L"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>ONT ZXHN F670L</strong>
+                <small>ONT dual band</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Wi-Fi 5 AC1200</td>
+            <td data-label="Portas">Gigabit ou mista*</td>
+            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
+            <td data-label="Observação" class="obs">Verificar a versão física. Algumas versões podem ter portas diferentes.</td>
+          </tr>
+
+          <tr data-linha="ZTE" data-modelo="ONT ZXHN F6600P ZTE Wi-Fi 6 AX3000">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/zte-f6600p.jpg"
+                alt="ZTE ONT ZXHN F6600P"
+                data-titulo="ZTE ONT ZXHN F6600P"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>ONT ZXHN F6600P</strong>
+                <small>ONT Wi-Fi 6</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Wi-Fi 6 AX3000</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">800 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">1 giga</span></td>
+            <td data-label="Observação" class="obs">ONT forte para planos altos. Melhor desempenho em 5 GHz ou cabo.</td>
+          </tr>
+
+          <tr data-linha="ZTE" data-modelo="ONT F6201B ZTE Wi-Fi 6 AX3000">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/zte-f6201b.jpg"
+                alt="ZTE ONT F6201B"
+                data-titulo="ZTE ONT F6201B"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>ONT F6201B</strong>
+                <small>ONT Wi-Fi 6</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Wi-Fi 6 AX3000</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">800 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">1 giga</span></td>
+            <td data-label="Observação" class="obs">Boa ONT para plano alto. Ideal para clientes com muitos dispositivos.</td>
+          </tr>
+
+          <tr data-linha="TP-Link" data-modelo="TP-Link G5 Gigabit AC">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/tplink-g5.jpg"
+                alt="TP-Link G5"
+                data-titulo="TP-Link G5"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-tplink">TP-Link</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>G5</strong>
+                <small>Verificar versão exata</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Verificar modelo exato</td>
+            <td data-label="Portas">Provável Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
+            <td data-label="Observação" class="obs">Confirmar se o modelo utilizado é realmente Gigabit. Se for porta 100, limitar até 100 mega.</td>
+          </tr>
+
+          <tr data-linha="TP-Link" data-modelo="TP-Link AX1500 EX141 Wi-Fi 6">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/tplink-ex141.jpg"
+                alt="TP-Link AX1500 EX141"
+                data-titulo="TP-Link AX1500 EX141"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-tplink">TP-Link</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>AX1500 EX141</strong>
+                <small>Roteador Wi-Fi 6</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Wi-Fi 6 AX1500</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">600 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">800 mega</span></td>
+            <td data-label="Observação" class="obs">Boa opção para planos acima de 500 mega.</td>
+          </tr>
+
+          <tr data-linha="TP-Link" data-modelo="TP-Link AX1800 Wi-Fi 6">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/tplink-ax1800.jpg"
+                alt="TP-Link AX1800"
+                data-titulo="TP-Link AX1800"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-tplink">TP-Link</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>AX1800</strong>
+                <small>Roteador Wi-Fi 6</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Wi-Fi 6 AX1800</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">700 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">1 giga</span></td>
+            <td data-label="Observação" class="obs">Boa opção residencial para planos altos.</td>
+          </tr>
+
+          <tr data-linha="TP-Link" data-modelo="TP-Link Deco M5 Mesh AC1300">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/deco-m5.jpg"
+                alt="TP-Link Deco M5"
+                data-titulo="TP-Link Deco M5"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-tplink">TP-Link</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>Deco M5</strong>
+                <small>Mesh Wi-Fi 5</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Mesh Wi-Fi 5 AC1300</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
+            <td data-label="Observação" class="obs">Muito bom para cobertura. Para velocidade maior, ideal interligar os Decos por cabo.</td>
+          </tr>
+
+          <tr data-linha="TP-Link" data-modelo="TP-Link Deco M4 Mesh AC1200">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/deco-m4.jpg"
+                alt="TP-Link Deco M4"
+                data-titulo="TP-Link Deco M4"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-tplink">TP-Link</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>Deco M4</strong>
+                <small>Mesh Wi-Fi 5</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Mesh Wi-Fi 5 AC1200</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
+            <td data-label="Observação" class="obs">Indicado para ampliar cobertura. Se usar mesh sem cabo, a velocidade pode cair.</td>
+          </tr>
+
+          <tr data-linha="MikroTik" data-modelo="MikroTik RB750Gr3 hEX RB 750 GR3">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/rb750gr3.jpg"
+                alt="MikroTik RB750Gr3"
+                data-titulo="MikroTik RB750Gr3 / hEX"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-mikrotik">MikroTik</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>RB750Gr3 / hEX</strong>
+                <small>Roteador cabeado</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Roteador cabeado</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">500 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">800 mega / 1 giga</span></td>
+            <td data-label="Observação" class="obs">Não tem Wi-Fi. Pode chegar mais alto com FastTrack e configuração otimizada.</td>
+          </tr>
+
+          <tr data-linha="Intelbras" data-modelo="Intelbras ACtion RG 1200 RG AC 1200">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/intelbras-rg1200.jpg"
+                alt="Intelbras ACtion RG 1200"
+                data-titulo="Intelbras ACtion RG 1200"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-intelbras">Intelbras</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>ACtion RG 1200</strong>
+                <small>Roteador Wi-Fi 5</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Wi-Fi 5 AC1200</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
+            <td data-label="Observação" class="obs">Boa opção residencial até 400 mega. Para plano maior, preferir Wi-Fi 6.</td>
+          </tr>
+
+          <tr data-linha="Intelbras" data-modelo="Intelbras IWR 3000N N300 2.4GHz">
+            <td data-label="Foto" class="foto-cell">
+              <img
+                class="foto-equipamento"
+                src="imagens/intelbras-iwr3000n.jpg"
+                alt="Intelbras IWR 3000N"
+                data-titulo="Intelbras IWR 3000N"
+                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+              />
+            </td>
+            <td data-label="Linha"><span class="tag tag-intelbras">Intelbras</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>IWR 3000N</strong>
+                <small>Roteador 2.4 GHz</small>
+              </div>
+            </td>
+            <td data-label="Tecnologia">Wi-Fi 4 N300</td>
+            <td data-label="Portas">Fast Ethernet 100 Mbps</td>
+            <td data-label="Recomendado até"><span class="baixo">80 mega</span></td>
+            <td data-label="Máximo aceitável"><span class="baixo">100 mega</span></td>
+            <td data-label="Observação" class="obs">Não indicado para planos acima de 100 mega.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div id="semResultados" class="sem-resultados">
+        Nenhum equipamento encontrado com esse filtro.
+      </div>
+    </section>
+
+    <section class="legenda">
+      <h2>Resumo para vendedores</h2>
+      <ul>
+        <li><strong>Plano acima de 100 mega:</strong> precisa de roteador ou ONT com porta Gigabit.</li>
+        <li><strong>Plano acima de 500 mega:</strong> preferir equipamento Wi-Fi 6.</li>
+        <li><strong>Cliente reclama de Wi-Fi:</strong> verificar distância, paredes, interferência e quantidade de dispositivos.</li>
+        <li><strong>Mesh:</strong> melhora cobertura, mas pode reduzir velocidade se os pontos estiverem conectados apenas via Wi-Fi.</li>
+        <li><strong>Para atingir 1 giga:</strong> o teste ideal deve ser feito via cabo em equipamento compatível com placa Gigabit.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    ViaTec - Consulta interna de capacidade de roteadores
+  </footer>
+
+  <div class="modal-foto" id="modalFoto">
+    <div class="modal-conteudo">
+      <div class="modal-topo">
+        <h2 id="tituloModal">Foto do equipamento</h2>
+        <button class="fechar-modal" type="button" id="fecharModal" aria-label="Fechar">
+          ×
+        </button>
+      </div>
+
+      <img id="imagemModal" src="" alt="Foto ampliada do equipamento" />
+
+      <p class="modal-dica">
+        Clique fora da imagem ou aperte ESC para fechar.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const busca = document.getElementById("busca");
+    const filtroLinha = document.getElementById("filtroLinha");
+    const linhas = document.querySelectorAll("#corpoTabela tr");
+    const semResultados = document.getElementById("semResultados");
+
+    const modalFoto = document.getElementById("modalFoto");
+    const imagemModal = document.getElementById("imagemModal");
+    const tituloModal = document.getElementById("tituloModal");
+    const fecharModal = document.getElementById("fecharModal");
+    const fotosEquipamentos = document.querySelectorAll(".foto-equipamento");
+
+    function filtrarTabela() {
+      const textoBusca = busca.value.toLowerCase().trim();
+      const linhaSelecionada = filtroLinha.value;
+      let totalVisivel = 0;
+
+      linhas.forEach((linha) => {
+        const modelo = linha.dataset.modelo.toLowerCase();
+        const marca = linha.dataset.linha;
+
+        const combinaBusca = modelo.includes(textoBusca);
+        const combinaLinha = linhaSelecionada === "todos" || marca === linhaSelecionada;
+
+        if (combinaBusca && combinaLinha) {
+          linha.style.display = "";
+          totalVisivel++;
+        } else {
+          linha.style.display = "none";
+        }
+      });
+
+      semResultados.style.display = totalVisivel === 0 ? "block" : "none";
+    }
+
+    function abrirModalFoto(imagem) {
+      const titulo = imagem.dataset.titulo || imagem.alt || "Foto do equipamento";
+
+      imagemModal.src = imagem.src;
+      imagemModal.alt = titulo;
+      tituloModal.textContent = titulo;
+      modalFoto.classList.add("ativo");
+      document.body.style.overflow = "hidden";
+    }
+
+    function fecharModalFoto() {
+      modalFoto.classList.remove("ativo");
+      imagemModal.src = "";
+      document.body.style.overflow = "";
+    }
+
+    busca.addEventListener("input", filtrarTabela);
+    filtroLinha.addEventListener("change", filtrarTabela);
+
+    fotosEquipamentos.forEach((foto) => {
+      foto.addEventListener("click", () => {
+        abrirModalFoto(foto);
+      });
+    });
+
+    fecharModal.addEventListener("click", fecharModalFoto);
+
+    modalFoto.addEventListener("click", (event) => {
+      if (event.target === modalFoto) {
+        fecharModalFoto();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modalFoto.classList.contains("ativo")) {
+        fecharModalFoto();
+      }
+    });
+  </script>
+</body>
+</html>
