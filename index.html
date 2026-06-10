@@ -8,22 +8,22 @@
 
   <style>
     :root {
-      --azul: #0066cc;
-      --azul-escuro: #003f82;
-      --azul-claro: #dbeafe;
-      --verde: #16a34a;
-      --verde-escuro: #15803d;
-      --verde-claro: #dcfce7;
-      --cinza-bg: #f3f6fb;
+      --azul: #0074e8;
+      --azul-escuro: #032f62;
+      --azul-profundo: #071a33;
+      --verde: #20c997;
+      --verde-escuro: #159a75;
+      --cinza-bg: #eef3f9;
       --cinza-card: #ffffff;
-      --cinza-texto: #334155;
-      --cinza-fraco: #64748b;
-      --cinza-borda: #dbe3ef;
+      --cinza-texto: #263445;
+      --cinza-fraco: #667085;
+      --cinza-borda: #d8e2ef;
       --vermelho: #dc2626;
       --amarelo: #f59e0b;
       --amarelo-claro: #fff7ed;
-      --sombra: 0 10px 30px rgba(15, 23, 42, 0.10);
-      --sombra-suave: 0 5px 18px rgba(15, 23, 42, 0.08);
+      --sombra: 0 14px 36px rgba(15, 23, 42, 0.12);
+      --sombra-suave: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
     }
 
     * {
@@ -38,53 +38,86 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background: var(--cinza-bg);
+      background:
+        radial-gradient(circle at top left, rgba(0, 116, 232, 0.12), transparent 30%),
+        radial-gradient(circle at top right, rgba(32, 201, 151, 0.12), transparent 28%),
+        var(--cinza-bg);
       color: var(--cinza-texto);
       line-height: 1.5;
     }
 
     header {
-      background: linear-gradient(135deg, var(--azul), var(--azul-escuro));
+      background:
+        linear-gradient(135deg, rgba(3, 47, 98, 0.96), rgba(7, 26, 51, 0.98)),
+        radial-gradient(circle at 20% 20%, rgba(32, 201, 151, 0.25), transparent 28%),
+        radial-gradient(circle at 80% 40%, rgba(0, 116, 232, 0.25), transparent 32%);
       color: white;
-      padding: 34px 18px;
-      text-align: center;
+      padding: 38px 18px;
+      position: relative;
+      overflow: hidden;
     }
-    .header-conteudo {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  text-align: left;
-}
 
-.logo-viatec {
-  width: 130px;
-  max-height: 80px;
-  object-fit: contain;
-  background: white;
-  padding: 10px;
-  border-radius: 18px;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
-}
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.55;
+    }
+
+    .header-conteudo {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      text-align: left;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-viatec {
+      width: 145px;
+      max-height: 88px;
+      object-fit: contain;
+      background: white;
+      padding: 12px;
+      border-radius: 22px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.25);
+    }
 
     header h1 {
-      font-size: 30px;
+      font-size: 34px;
       margin-bottom: 8px;
+      letter-spacing: -0.5px;
     }
 
     header p {
       max-width: 850px;
-      margin: 0 auto;
       font-size: 16px;
-      opacity: 0.95;
+      opacity: 0.92;
+    }
+
+    .ultima-atualizacao {
+      display: inline-flex;
+      margin-top: 12px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: bold;
+      backdrop-filter: blur(4px);
     }
 
     .container {
-      max-width: 1240px;
+      max-width: 1320px;
       margin: 0 auto;
-      padding: 22px 16px 40px;
+      padding: 24px 16px 44px;
     }
 
     .alerta {
@@ -92,31 +125,44 @@
       border: 1px solid #fed7aa;
       border-left: 6px solid var(--amarelo);
       color: #7c2d12;
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 18px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin-bottom: 20px;
+      box-shadow: var(--sombra-suave);
     }
 
     .cards {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+      gap: 16px;
       margin-bottom: 20px;
     }
 
     .card {
-      background: var(--cinza-card);
-      border-radius: 16px;
-      padding: 18px;
-      box-shadow: var(--sombra);
-      border: 1px solid var(--cinza-borda);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,250,252,0.98));
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--sombra-suave);
+      border: 1px solid rgba(216, 226, 239, 0.95);
+      position: relative;
+      overflow: hidden;
+      min-height: 132px;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--azul), var(--verde));
     }
 
     .card h3 {
       color: var(--azul-escuro);
-      font-size: 17px;
-      margin-bottom: 6px;
+      font-size: 18px;
+      margin-bottom: 8px;
     }
 
     .card p {
@@ -124,24 +170,173 @@
       color: #475569;
     }
 
-    .toolbar {
+    .card strong {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--verde-escuro);
+      font-size: 13px;
+    }
+
+    .painel-expansivel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    details.bloco {
       background: white;
       border: 1px solid var(--cinza-borda);
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: var(--sombra);
-      display: grid;
-      grid-template-columns: 1fr 240px;
+      border-radius: 22px;
+      box-shadow: var(--sombra-suave);
+      overflow: hidden;
+    }
+
+    details.bloco summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      font-weight: bold;
+      color: var(--azul-escuro);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 12px;
+      font-size: 18px;
+      user-select: none;
+    }
+
+    details.bloco summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .summary-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #dbeafe;
+      color: var(--azul-escuro);
+      font-size: 18px;
+    }
+
+    .summary-seta {
+      transition: transform 0.2s ease;
+      font-size: 18px;
+    }
+
+    details[open] .summary-seta {
+      transform: rotate(180deg);
+    }
+
+    .bloco-conteudo {
+      padding: 0 20px 20px;
+    }
+
+    .consulta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .consulta-item {
+      border: 1px solid var(--cinza-borda);
+      border-radius: 14px;
+      padding: 12px;
+      background: #f8fafc;
+    }
+
+    .consulta-item strong {
+      display: block;
+      color: var(--azul-escuro);
+      margin-bottom: 4px;
+    }
+
+    .consulta-item span {
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .teste-lista {
+      padding-left: 20px;
+    }
+
+    .teste-lista li {
+      margin-bottom: 7px;
+    }
+
+    .acoes-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
       margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .botoes-acoes {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .botao {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      color: white;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: var(--sombra-suave);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .botao:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--sombra);
+    }
+
+    .botao-imprimir {
+      background: linear-gradient(135deg, var(--verde), var(--verde-escuro));
+    }
+
+    .botao-noc {
+      background: linear-gradient(135deg, var(--azul), var(--azul-escuro));
+    }
+
+    .toolbar {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid var(--cinza-borda);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: var(--sombra-suave);
+      display: grid;
+      grid-template-columns: 1fr 250px;
+      gap: 12px;
+      flex: 1;
+      min-width: 540px;
     }
 
     input,
     select {
       width: 100%;
       border: 1px solid var(--cinza-borda);
-      border-radius: 12px;
-      padding: 13px 14px;
+      border-radius: 14px;
+      padding: 14px 15px;
       font-size: 15px;
       outline: none;
       background: white;
@@ -151,12 +346,12 @@
     input:focus,
     select:focus {
       border-color: var(--azul);
-      box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.13);
+      box-shadow: 0 0 0 4px rgba(0, 116, 232, 0.14);
     }
 
     .table-wrapper {
       background: white;
-      border-radius: 18px;
+      border-radius: 24px;
       box-shadow: var(--sombra);
       border: 1px solid var(--cinza-borda);
       overflow: hidden;
@@ -168,49 +363,62 @@
     }
 
     thead {
-      background: var(--azul-escuro);
+      background: linear-gradient(135deg, var(--azul-escuro), var(--azul-profundo));
       color: white;
     }
 
     th,
     td {
-      padding: 13px 12px;
-      text-align: left;
+      padding: 15px 12px;
       font-size: 14px;
       border-bottom: 1px solid var(--cinza-borda);
       vertical-align: middle;
     }
 
     th {
-      font-size: 13px;
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.05em;
       white-space: nowrap;
+      text-align: center;
+    }
+
+    td {
+      text-align: center;
+    }
+
+    td:nth-child(3) {
+      text-align: left;
+    }
+
+    tbody tr {
+      transition: background 0.2s ease;
     }
 
     tbody tr:hover {
-      background: #f8fafc;
+      background: #f8fbff;
     }
 
     .foto-cell {
-      width: 95px;
+      width: 105px;
     }
 
     .foto-equipamento {
-      width: 78px;
-      height: 58px;
+      width: 86px;
+      height: 66px;
       object-fit: contain;
       background: #f8fafc;
       border: 1px solid var(--cinza-borda);
-      border-radius: 12px;
-      padding: 4px;
+      border-radius: 16px;
+      padding: 6px;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
     .foto-equipamento:hover {
-      transform: scale(1.06);
+      transform: scale(1.07);
       box-shadow: var(--sombra-suave);
+      border-color: var(--azul);
     }
 
     .modelo-box {
@@ -221,6 +429,7 @@
 
     .modelo-box strong {
       color: #0f172a;
+      font-size: 15px;
     }
 
     .modelo-box small {
@@ -229,8 +438,11 @@
     }
 
     .tag {
-      display: inline-block;
-      padding: 5px 9px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 78px;
+      padding: 7px 10px;
       border-radius: 999px;
       font-size: 12px;
       font-weight: bold;
@@ -256,46 +468,109 @@
       background: #dcfce7;
       color: #15803d;
     }
+
     .tag-ubiquiti {
-  background: #e0f2fe;
-  color: #0369a1;
-}
+      background: #e0f2fe;
+      color: #0369a1;
+    }
 
-    .mega {
+    .tag-infraestrutura {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .uso {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
       font-weight: bold;
-      color: var(--verde);
+      white-space: nowrap;
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .uso-basico {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .uso-residencial {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .uso-plano-alto {
+      background: #d1fae5;
+      color: #047857;
+    }
+
+    .uso-cobertura {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+
+    .uso-alto-fluxo {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .uso-infra {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .plano {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 92px;
+      font-weight: bold;
+      padding: 7px 10px;
+      border-radius: 999px;
       white-space: nowrap;
     }
 
-    .maximo {
-      font-weight: bold;
-      color: var(--azul);
-      white-space: nowrap;
+    .plano-100 {
+      color: #991b1b;
+      background: #fee2e2;
     }
 
-    .baixo {
-      color: var(--vermelho);
-      font-weight: bold;
-      white-space: nowrap;
+    .plano-400 {
+      color: #1e40af;
+      background: #dbeafe;
     }
 
-    .obs {
-      max-width: 340px;
+    .plano-600 {
+      color: #047857;
+      background: #d1fae5;
+    }
+
+    .plano-800 {
+      color: #065f46;
+      background: #ccfbf1;
+    }
+
+    .plano-fluxo {
+      color: #6d28d9;
+      background: #ede9fe;
     }
 
     .legenda {
-      background: white;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(248,250,252,0.98));
       border: 1px solid var(--cinza-borda);
-      border-radius: 16px;
-      box-shadow: var(--sombra);
-      margin-top: 20px;
-      padding: 18px;
+      border-radius: 22px;
+      box-shadow: var(--sombra-suave);
+      margin-top: 22px;
+      padding: 22px;
     }
 
     .legenda h2 {
       color: var(--azul-escuro);
-      font-size: 20px;
-      margin-bottom: 10px;
+      font-size: 22px;
+      margin-bottom: 12px;
     }
 
     .legenda ul {
@@ -303,19 +578,19 @@
     }
 
     .legenda li {
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .rodape {
       text-align: center;
-      padding: 20px;
+      padding: 22px;
       color: #64748b;
       font-size: 13px;
     }
 
     .sem-resultados {
       text-align: center;
-      padding: 24px;
+      padding: 28px;
       display: none;
       color: #64748b;
       font-weight: bold;
@@ -324,12 +599,13 @@
     .modal-foto {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.78);
+      background: rgba(7, 26, 51, 0.84);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 9999;
       padding: 20px;
+      backdrop-filter: blur(5px);
     }
 
     .modal-foto.ativo {
@@ -338,12 +614,12 @@
 
     .modal-conteudo {
       background: white;
-      border-radius: 18px;
+      border-radius: 22px;
       width: min(720px, 96vw);
       max-height: 92vh;
-      padding: 18px;
+      padding: 20px;
       position: relative;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
       animation: abrirModal 0.18s ease;
     }
 
@@ -376,8 +652,8 @@
       border: none;
       background: #fee2e2;
       color: #991b1b;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 999px;
       font-size: 24px;
       line-height: 1;
@@ -394,9 +670,9 @@
       max-height: 65vh;
       object-fit: contain;
       background: #f8fafc;
-      border-radius: 14px;
+      border-radius: 16px;
       border: 1px solid var(--cinza-borda);
-      padding: 10px;
+      padding: 12px;
     }
 
     .modal-dica {
@@ -406,29 +682,28 @@
       text-align: center;
     }
 
-    .botao-imprimir {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border: none;
-      background: var(--verde);
-      color: white;
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-bottom: 16px;
-      box-shadow: var(--sombra-suave);
-    }
+    @media (max-width: 1100px) {
+      .painel-expansivel {
+        grid-template-columns: 1fr;
+      }
 
-    .botao-imprimir:hover {
-      background: var(--verde-escuro);
+      .acoes-topo {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .toolbar {
+        min-width: 100%;
+      }
     }
 
     @media (max-width: 980px) {
       .cards {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .consulta-grid {
+        grid-template-columns: 1fr;
       }
 
       .toolbar {
@@ -450,10 +725,10 @@
 
       tbody tr {
         background: white;
-        margin: 12px;
+        margin: 14px;
         border: 1px solid var(--cinza-borda);
-        border-radius: 16px;
-        padding: 12px;
+        border-radius: 20px;
+        padding: 14px;
         box-shadow: var(--sombra-suave);
       }
 
@@ -463,8 +738,13 @@
 
       td {
         border-bottom: none;
-        padding: 8px 4px;
+        padding: 9px 4px;
         font-size: 14px;
+        text-align: left;
+      }
+
+      td:nth-child(3) {
+        text-align: left;
       }
 
       td::before {
@@ -472,9 +752,10 @@
         display: block;
         font-weight: bold;
         color: var(--azul-escuro);
-        margin-bottom: 2px;
+        margin-bottom: 4px;
         font-size: 12px;
         text-transform: uppercase;
+        letter-spacing: 0.04em;
       }
 
       .foto-cell {
@@ -487,22 +768,40 @@
 
       .foto-equipamento {
         width: 100%;
-        height: 145px;
+        height: 155px;
         margin-bottom: 4px;
       }
 
-      .obs {
-        max-width: 100%;
+      .plano,
+      .uso {
+        justify-content: flex-start;
       }
     }
 
     @media (max-width: 560px) {
+      header {
+        padding: 30px 16px;
+      }
+
       header h1 {
-        font-size: 24px;
+        font-size: 25px;
+        text-align: center;
       }
 
       header p {
         font-size: 14px;
+        text-align: center;
+      }
+
+      .header-conteudo {
+        flex-direction: column;
+        text-align: center;
+        gap: 14px;
+      }
+
+      .logo-viatec {
+        width: 125px;
+        max-height: 78px;
       }
 
       .cards {
@@ -513,22 +812,29 @@
         padding: 16px 10px 30px;
       }
 
+      .botoes-acoes {
+        flex-direction: column;
+      }
+
+      .botao {
+        width: 100%;
+      }
+
+      details.bloco summary {
+        font-size: 16px;
+        padding: 16px;
+      }
+
+      .bloco-conteudo {
+        padding: 0 16px 16px;
+      }
+
       .modal-conteudo {
         padding: 14px;
       }
 
       .modal-topo h2 {
         font-size: 17px;
-        .header-conteudo {
-  flex-direction: column;
-  text-align: center;
-  gap: 14px;
-}
-
-.logo-viatec {
-  width: 120px;
-  max-height: 75px;
-}
       }
     }
 
@@ -543,12 +849,14 @@
         padding: 10px;
       }
 
+      header::before,
       .toolbar,
       .cards,
       .alerta,
       .rodape,
-      .botao-imprimir,
-      .modal-foto {
+      .botao,
+      .modal-foto,
+      .painel-expansivel {
         display: none !important;
       }
 
@@ -578,78 +886,193 @@
         width: 55px;
         height: 42px;
       }
+
+      .logo-viatec {
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+
+      .plano,
+      .uso {
+        background: transparent;
+        padding: 0;
+      }
     }
   </style>
 </head>
 
 <body>
-<header>
-  <div class="header-conteudo">
-    <img 
-      src="imagens/logo-viatec.png" 
-      alt="Logo ViaTec" 
-      class="logo-viatec"
-      onerror="this.style.display='none';"
-    />
+  <header>
+    <div class="header-conteudo">
+      <img
+        src="imagens/logo-viatec.png"
+        alt="Logo ViaTec"
+        class="logo-viatec"
+        onerror="this.style.display='none';"
+      />
 
-    <div>
-      <h1>Capacidade de Roteadores e ONTs</h1>
-      <p>
-        Consulta rápida para vendedores e técnicos verificarem qual plano de internet é recomendado para cada equipamento.
-      </p>
+      <div>
+        <h1>Capacidade de Roteadores e ONTs</h1>
+        <p>
+          Consulta rápida para vendedores e técnicos verificarem qual plano de internet é indicado para cada equipamento.
+        </p>
+        <span class="ultima-atualizacao">Última atualização: 10/06/2026</span>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
   <main class="container">
     <div class="alerta">
       <strong>Atenção:</strong>
-      os valores abaixo são recomendações práticas. A velocidade real pode variar conforme Wi-Fi, distância,
-      interferência, quantidade de dispositivos, cabo, PPPoE, NAT, firewall e configuração do equipamento.
+      os valores abaixo indicam o plano mais seguro para venda em cada equipamento.
+      Mesmo em planos de até 100 mega, equipamentos somente 2.4 GHz podem sofrer interferência.
+      Sempre que possível, o ideal é usar roteador dual band. Para teste mais confiável, use cabo de rede e apenas um dispositivo conectado.
     </div>
 
     <section class="cards">
       <div class="card">
         <h3>Até 100 mega</h3>
-        <p>Equipamentos Fast Ethernet ou Wi-Fi 2.4 GHz.</p>
+        <p>
+          Pode usar equipamento Fast Ethernet, mas o ideal é ser dual band para reduzir problemas de interferência.
+        </p>
+        <strong>Evitar somente 2.4 GHz quando possível</strong>
       </div>
 
       <div class="card">
         <h3>200 a 500 mega</h3>
-        <p>Equipamentos Gigabit com Wi-Fi 5 dual band.</p>
+        <p>
+          Usar equipamento Gigabit com Wi-Fi 5 dual band ou superior.
+        </p>
+        <strong>Residencial padrão</strong>
       </div>
 
       <div class="card">
         <h3>600 a 800 mega</h3>
-        <p>Preferencialmente roteadores Wi-Fi 6 AX1500 ou superior.</p>
+        <p>
+          Priorizar equipamentos Wi-Fi 6 AX1500, AX1800 ou superior.
+        </p>
+        <strong>Planos altos</strong>
       </div>
 
       <div class="card">
-        <h3>800 mega a 1 giga</h3>
-        <p>Equipamentos AX1800, AX3000 ou uso via cabo Gigabit.</p>
+        <h3>Alto fluxo</h3>
+        <p>
+          Para empresas, eventos, comércio e muitos usuários conectados.
+        </p>
+        <strong>RB + UniFi/AP profissional</strong>
       </div>
     </section>
 
-    <button class="botao-imprimir" type="button" onclick="window.print()">
-      Imprimir / Salvar em PDF
-    </button>
+    <section class="painel-expansivel">
+      <details class="bloco">
+        <summary>
+          <span class="summary-left">
+            <span class="summary-icon">⚡</span>
+            Consulta rápida por cenário
+          </span>
+          <span class="summary-seta">⌄</span>
+        </summary>
 
-    <section class="toolbar">
-      <input
-        type="text"
-        id="busca"
-        placeholder="Buscar por modelo. Ex: AX3000, Deco, Intelbras, ZTE..."
-      />
+        <div class="bloco-conteudo">
+          <div class="consulta-grid">
+            <div class="consulta-item">
+              <strong>Até 100 mega</strong>
+              <span>
+                Pode ser Fast Ethernet, mas o ideal é usar roteador dual band.
+                Equipamentos somente 2.4 GHz podem sofrer interferência.
+              </span>
+            </div>
 
-      <select id="filtroLinha">
-        <option value="todos">Todas as linhas</option>
-        <option value="ZTE">ZTE</option>
-        <option value="TP-Link">TP-Link</option>
-        <option value="MikroTik">MikroTik</option>
-        <option value="Intelbras">Intelbras</option>
-        <option value="Ubiquiti">Ubiquiti</option>
-      </select>
+            <div class="consulta-item">
+              <strong>Até 400 mega</strong>
+              <span>H199A, F670L, RG 1200, Deco M4/M5.</span>
+            </div>
+
+            <div class="consulta-item">
+              <strong>Até 600 mega</strong>
+              <span>AX1500, EX141 ou equipamento Wi-Fi 6 similar.</span>
+            </div>
+
+            <div class="consulta-item">
+              <strong>Até 800 mega</strong>
+              <span>AX3000, F6600P, F6201B e equipamentos Wi-Fi 6 superiores.</span>
+            </div>
+
+            <div class="consulta-item">
+              <strong>Cobertura maior</strong>
+              <span>Deco M4/M5 ou solução mesh bem posicionada.</span>
+            </div>
+
+            <div class="consulta-item">
+              <strong>Alto fluxo</strong>
+              <span>MikroTik RB + UniFi/AP profissional.</span>
+            </div>
+
+            <div class="consulta-item">
+              <strong>Switch</strong>
+              <span>Verificar se é Fast ou Gigabit. Switch Fast limita planos acima de 100 mega.</span>
+            </div>
+
+            <div class="consulta-item">
+              <strong>Conversor de fibra</strong>
+              <span>Verificar se é Fast ou Gigabit. Conversor fast limita planos acima de 100 mega.</span>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="bloco">
+        <summary>
+          <span class="summary-left">
+            <span class="summary-icon">🧪</span>
+            Teste correto de velocidade
+          </span>
+          <span class="summary-seta">⌄</span>
+        </summary>
+
+        <div class="bloco-conteudo">
+          <ul class="teste-lista">
+            <li>Fazer o teste preferencialmente via cabo de rede.</li>
+            <li>Usar apenas um dispositivo conectado na rede durante o teste.</li>
+            <li>Conferir se o notebook/PC tem placa de rede Gigabit.</li>
+            <li>Conferir se o cabo suporta a velocidade contratada.</li>
+            <li>Evitar validar plano contratado apenas por teste no Wi-Fi.</li>
+            <li>No Wi-Fi, testar próximo ao roteador e na rede 5 GHz quando disponível.</li>
+            <li>Equipamentos somente 2.4 GHz podem sofrer interferência mesmo em planos menores.</li>
+          </ul>
+        </div>
+      </details>
     </section>
+
+    <div class="acoes-topo">
+      <div class="botoes-acoes">
+        <button class="botao botao-imprimir" type="button" onclick="window.print()">
+          Imprimir / Salvar em PDF
+        </button>
+
+        <a class="botao botao-noc" href="mailto:noc@viatec.net.br?subject=D%C3%BAvida%20sobre%20capacidade%20de%20roteador">
+          Dúvida? Consulte o NOC
+        </a>
+      </div>
+
+      <section class="toolbar">
+        <input
+          type="text"
+          id="busca"
+          placeholder="Buscar por modelo. Ex: AX3000, Deco, Intelbras, ZTE, UniFi, switch..."
+        />
+
+        <select id="filtroLinha">
+          <option value="todos">Todas as linhas</option>
+          <option value="ZTE">ZTE</option>
+          <option value="TP-Link">TP-Link</option>
+          <option value="MikroTik">MikroTik</option>
+          <option value="Intelbras">Intelbras</option>
+          <option value="Ubiquiti">Ubiquiti</option>
+          <option value="Infraestrutura">Infraestrutura</option>
+        </select>
+      </section>
+    </div>
 
     <section class="table-wrapper">
       <table>
@@ -658,24 +1081,17 @@
             <th>Foto</th>
             <th>Linha</th>
             <th>Modelo</th>
+            <th>Uso indicado</th>
             <th>Tecnologia</th>
             <th>Portas</th>
-            <th>Recomendado até</th>
-            <th>Máximo aceitável</th>
-            <th>Observação</th>
+            <th>Plano indicado</th>
           </tr>
         </thead>
 
         <tbody id="corpoTabela">
-          <tr data-linha="ZTE" data-modelo="AX3000 H3601PE ZTE Wi-Fi 6 AX3000">
+          <tr data-linha="ZTE" data-modelo="AX3000 H3601PE ZTE Wi-Fi 6 AX3000 plano alto">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/zte-h3601pe.jpg"
-                alt="ZTE AX3000 H3601PE"
-                data-titulo="ZTE AX3000 H3601PE"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/zte-h3601pe.jpg" alt="ZTE AX3000 H3601PE" data-titulo="ZTE AX3000 H3601PE" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
             <td data-label="Modelo">
@@ -684,22 +1100,15 @@
                 <small>Roteador Wi-Fi 6</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-plano-alto">Plano alto</span></td>
             <td data-label="Tecnologia">Wi-Fi 6 AX3000</td>
             <td data-label="Portas">Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">800 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">1 giga</span></td>
-            <td data-label="Observação" class="obs">Excelente para planos altos. Para melhor resultado, usar 5 GHz ou cabo.</td>
+            <td data-label="Plano indicado"><span class="plano plano-800">800 mega</span></td>
           </tr>
 
-          <tr data-linha="ZTE" data-modelo="AX1500 ZXHN H3601N ZTE Wi-Fi 6 AX1500">
+          <tr data-linha="ZTE" data-modelo="AX1500 ZXHN H3601N ZTE Wi-Fi 6 AX1500 residencial plano alto">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/zte-h3601n.jpg"
-                alt="ZTE AX1500 ZXHN H3601N"
-                data-titulo="ZTE AX1500 ZXHN H3601N"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/zte-h3601n.jpg" alt="ZTE AX1500 ZXHN H3601N" data-titulo="ZTE AX1500 ZXHN H3601N" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
             <td data-label="Modelo">
@@ -708,22 +1117,15 @@
                 <small>Roteador Wi-Fi 6</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-plano-alto">Plano alto</span></td>
             <td data-label="Tecnologia">Wi-Fi 6 AX1500</td>
             <td data-label="Portas">Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">600 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">800 mega</span></td>
-            <td data-label="Observação" class="obs">Boa opção para cliente residencial com plano médio ou alto.</td>
+            <td data-label="Plano indicado"><span class="plano plano-600">600 mega</span></td>
           </tr>
 
-          <tr data-linha="ZTE" data-modelo="H199A ZTE Wi-Fi 5 AC1200">
+          <tr data-linha="ZTE" data-modelo="H199A ZTE Wi-Fi 5 AC1200 residencial">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/zte-h199a.jpg"
-                alt="ZTE H199A"
-                data-titulo="ZTE H199A"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/zte-h199a.jpg" alt="ZTE H199A" data-titulo="ZTE H199A" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
             <td data-label="Modelo">
@@ -732,22 +1134,15 @@
                 <small>Roteador Wi-Fi 5</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-residencial">Residencial</span></td>
             <td data-label="Tecnologia">Wi-Fi 5 AC1200</td>
             <td data-label="Portas">Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
-            <td data-label="Observação" class="obs">Bom roteador AC. Para planos acima de 500 mega, preferir Wi-Fi 6.</td>
+            <td data-label="Plano indicado"><span class="plano plano-400">400 mega</span></td>
           </tr>
 
-          <tr data-linha="ZTE" data-modelo="ONT ZXHN F670L ZTE Wi-Fi 5 AC1200">
+          <tr data-linha="ZTE" data-modelo="ONT ZXHN F670L ZTE Wi-Fi 5 AC1200 residencial">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/zte-f670l.jpg"
-                alt="ZTE ONT ZXHN F670L"
-                data-titulo="ZTE ONT ZXHN F670L"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/zte-f670l.jpg" alt="ZTE ONT ZXHN F670L" data-titulo="ZTE ONT ZXHN F670L" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
             <td data-label="Modelo">
@@ -756,22 +1151,15 @@
                 <small>ONT dual band</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-residencial">Residencial</span></td>
             <td data-label="Tecnologia">Wi-Fi 5 AC1200</td>
-            <td data-label="Portas">Gigabit ou mista*</td>
-            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
-            <td data-label="Observação" class="obs">Verificar a versão física. Algumas versões podem ter portas diferentes.</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Plano indicado"><span class="plano plano-400">400 mega</span></td>
           </tr>
 
-          <tr data-linha="ZTE" data-modelo="ONT ZXHN F6600P ZTE Wi-Fi 6 AX3000">
+          <tr data-linha="ZTE" data-modelo="ONT ZXHN F6600P ZTE Wi-Fi 6 AX3000 plano alto">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/zte-f6600p.jpg"
-                alt="ZTE ONT ZXHN F6600P"
-                data-titulo="ZTE ONT ZXHN F6600P"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/zte-f6600p.jpg" alt="ZTE ONT ZXHN F6600P" data-titulo="ZTE ONT ZXHN F6600P" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
             <td data-label="Modelo">
@@ -780,22 +1168,15 @@
                 <small>ONT Wi-Fi 6</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-plano-alto">Plano alto</span></td>
             <td data-label="Tecnologia">Wi-Fi 6 AX3000</td>
             <td data-label="Portas">Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">800 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">1 giga</span></td>
-            <td data-label="Observação" class="obs">ONT forte para planos altos. Melhor desempenho em 5 GHz ou cabo.</td>
+            <td data-label="Plano indicado"><span class="plano plano-800">800 mega</span></td>
           </tr>
 
-          <tr data-linha="ZTE" data-modelo="ONT F6201B ZTE Wi-Fi 6 AX3000">
+          <tr data-linha="ZTE" data-modelo="ONT F6201B ZTE Wi-Fi 6 AX3000 plano alto">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/zte-f6201b.jpg"
-                alt="ZTE ONT F6201B"
-                data-titulo="ZTE ONT F6201B"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/zte-f6201b.jpg" alt="ZTE ONT F6201B" data-titulo="ZTE ONT F6201B" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-zte">ZTE</span></td>
             <td data-label="Modelo">
@@ -804,22 +1185,15 @@
                 <small>ONT Wi-Fi 6</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-plano-alto">Plano alto</span></td>
             <td data-label="Tecnologia">Wi-Fi 6 AX3000</td>
             <td data-label="Portas">Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">800 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">1 giga</span></td>
-            <td data-label="Observação" class="obs">Boa ONT para plano alto. Ideal para clientes com muitos dispositivos.</td>
+            <td data-label="Plano indicado"><span class="plano plano-800">800 mega</span></td>
           </tr>
 
-          <tr data-linha="TP-Link" data-modelo="TP-Link G5 Gigabit AC">
+          <tr data-linha="TP-Link" data-modelo="TP-Link G5 Gigabit AC residencial">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/tplink-g5.jpg"
-                alt="TP-Link G5"
-                data-titulo="TP-Link G5"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/tplink-g5.jpg" alt="TP-Link G5" data-titulo="TP-Link G5" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-tplink">TP-Link</span></td>
             <td data-label="Modelo">
@@ -828,22 +1202,15 @@
                 <small>Verificar versão exata</small>
               </div>
             </td>
-            <td data-label="Tecnologia">Verificar modelo exato</td>
-            <td data-label="Portas">Provável Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
-            <td data-label="Observação" class="obs">Confirmar se o modelo utilizado é realmente Gigabit. Se for porta 100, limitar até 100 mega.</td>
+            <td data-label="Uso indicado"><span class="uso uso-residencial">Residencial</span></td>
+            <td data-label="Tecnologia">Wi-Fi 5 AC1200</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Plano indicado"><span class="plano plano-400">400 mega</span></td>
           </tr>
 
-          <tr data-linha="TP-Link" data-modelo="TP-Link AX1500 EX141 Wi-Fi 6">
+          <tr data-linha="TP-Link" data-modelo="TP-Link AX1500 EX141 Wi-Fi 6 plano alto">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/tplink-ex141.jpg"
-                alt="TP-Link AX1500 EX141"
-                data-titulo="TP-Link AX1500 EX141"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/tplink-ex141.jpg" alt="TP-Link AX1500 EX141" data-titulo="TP-Link AX1500 EX141" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-tplink">TP-Link</span></td>
             <td data-label="Modelo">
@@ -852,22 +1219,15 @@
                 <small>Roteador Wi-Fi 6</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-plano-alto">Plano alto</span></td>
             <td data-label="Tecnologia">Wi-Fi 6 AX1500</td>
             <td data-label="Portas">Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">600 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">800 mega</span></td>
-            <td data-label="Observação" class="obs">Boa opção para planos acima de 500 mega.</td>
+            <td data-label="Plano indicado"><span class="plano plano-600">600 mega</span></td>
           </tr>
 
-          <tr data-linha="TP-Link" data-modelo="TP-Link AX1800 Wi-Fi 6">
+          <tr data-linha="TP-Link" data-modelo="TP-Link AX1800 Wi-Fi 6 plano alto">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/tplink-ax1800.jpg"
-                alt="TP-Link AX1800"
-                data-titulo="TP-Link AX1800"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/tplink-ax1800.jpg" alt="TP-Link AX1800" data-titulo="TP-Link AX1800" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-tplink">TP-Link</span></td>
             <td data-label="Modelo">
@@ -876,22 +1236,15 @@
                 <small>Roteador Wi-Fi 6</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-plano-alto">Plano alto</span></td>
             <td data-label="Tecnologia">Wi-Fi 6 AX1800</td>
             <td data-label="Portas">Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">700 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">1 giga</span></td>
-            <td data-label="Observação" class="obs">Boa opção residencial para planos altos.</td>
+            <td data-label="Plano indicado"><span class="plano plano-800">700 mega</span></td>
           </tr>
 
-          <tr data-linha="TP-Link" data-modelo="TP-Link Deco M5 Mesh AC1300">
+          <tr data-linha="TP-Link" data-modelo="TP-Link Deco M5 Mesh AC1300 cobertura mesh">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/deco-m5.jpg"
-                alt="TP-Link Deco M5"
-                data-titulo="TP-Link Deco M5"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/deco-m5.jpg" alt="TP-Link Deco M5" data-titulo="TP-Link Deco M5" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-tplink">TP-Link</span></td>
             <td data-label="Modelo">
@@ -900,22 +1253,15 @@
                 <small>Mesh Wi-Fi 5</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-cobertura">Cobertura</span></td>
             <td data-label="Tecnologia">Mesh Wi-Fi 5 AC1300</td>
             <td data-label="Portas">Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
-            <td data-label="Observação" class="obs">Muito bom para cobertura. Para velocidade maior, ideal interligar os Decos por cabo.</td>
+            <td data-label="Plano indicado"><span class="plano plano-400">400 mega</span></td>
           </tr>
 
-          <tr data-linha="TP-Link" data-modelo="TP-Link Deco M4 Mesh AC1200">
+          <tr data-linha="TP-Link" data-modelo="TP-Link Deco M4 Mesh AC1200 cobertura mesh">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/deco-m4.jpg"
-                alt="TP-Link Deco M4"
-                data-titulo="TP-Link Deco M4"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/deco-m4.jpg" alt="TP-Link Deco M4" data-titulo="TP-Link Deco M4" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-tplink">TP-Link</span></td>
             <td data-label="Modelo">
@@ -924,22 +1270,15 @@
                 <small>Mesh Wi-Fi 5</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-cobertura">Cobertura</span></td>
             <td data-label="Tecnologia">Mesh Wi-Fi 5 AC1200</td>
             <td data-label="Portas">Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
-            <td data-label="Observação" class="obs">Indicado para ampliar cobertura. Se usar mesh sem cabo, a velocidade pode cair.</td>
+            <td data-label="Plano indicado"><span class="plano plano-400">400 mega</span></td>
           </tr>
 
-          <tr data-linha="MikroTik" data-modelo="MikroTik RB750Gr3 hEX RB 750 GR3">
+          <tr data-linha="MikroTik" data-modelo="MikroTik RB750Gr3 hEX RB 750 GR3 controle rede roteador cabeado">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/rb750gr3.jpg"
-                alt="MikroTik RB750Gr3"
-                data-titulo="MikroTik RB750Gr3 / hEX"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/rb750gr3.jpg" alt="MikroTik RB750Gr3" data-titulo="MikroTik RB750Gr3 / hEX" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-mikrotik">MikroTik</span></td>
             <td data-label="Modelo">
@@ -948,22 +1287,15 @@
                 <small>Roteador cabeado</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-alto-fluxo">Controle de rede</span></td>
             <td data-label="Tecnologia">Roteador cabeado</td>
             <td data-label="Portas">Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">500 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">800 mega / 1 giga</span></td>
-            <td data-label="Observação" class="obs">Não tem Wi-Fi. Pode chegar mais alto com FastTrack e configuração otimizada.</td>
+            <td data-label="Plano indicado"><span class="plano plano-600">500 mega</span></td>
           </tr>
 
-          <tr data-linha="Intelbras" data-modelo="Intelbras ACtion RG 1200 RG AC 1200">
+          <tr data-linha="Intelbras" data-modelo="Intelbras ACtion RG 1200 RG AC 1200 residencial">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/intelbras-rg1200.jpg"
-                alt="Intelbras ACtion RG 1200"
-                data-titulo="Intelbras ACtion RG 1200"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/intelbras-rg1200.jpg" alt="Intelbras ACtion RG 1200" data-titulo="Intelbras ACtion RG 1200" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-intelbras">Intelbras</span></td>
             <td data-label="Modelo">
@@ -972,22 +1304,15 @@
                 <small>Roteador Wi-Fi 5</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-residencial">Residencial</span></td>
             <td data-label="Tecnologia">Wi-Fi 5 AC1200</td>
             <td data-label="Portas">Gigabit</td>
-            <td data-label="Recomendado até"><span class="mega">400 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="maximo">500 mega</span></td>
-            <td data-label="Observação" class="obs">Boa opção residencial até 400 mega. Para plano maior, preferir Wi-Fi 6.</td>
+            <td data-label="Plano indicado"><span class="plano plano-400">400 mega</span></td>
           </tr>
 
-          <tr data-linha="Intelbras" data-modelo="Intelbras IWR 3000N N300 2.4GHz">
+          <tr data-linha="Intelbras" data-modelo="Intelbras IWR 3000N N300 2.4GHz basico">
             <td data-label="Foto" class="foto-cell">
-              <img
-                class="foto-equipamento"
-                src="imagens/intelbras-iwr3000n.jpg"
-                alt="Intelbras IWR 3000N"
-                data-titulo="Intelbras IWR 3000N"
-                onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-              />
+              <img class="foto-equipamento" src="imagens/intelbras-iwr3000n.jpg" alt="Intelbras IWR 3000N" data-titulo="Intelbras IWR 3000N" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
             </td>
             <td data-label="Linha"><span class="tag tag-intelbras">Intelbras</span></td>
             <td data-label="Modelo">
@@ -996,54 +1321,61 @@
                 <small>Roteador 2.4 GHz</small>
               </div>
             </td>
+            <td data-label="Uso indicado"><span class="uso uso-basico">Básico</span></td>
             <td data-label="Tecnologia">Wi-Fi 4 N300</td>
-            <td data-label="Portas">Fast Ethernet 100 Mbps</td>
-            <td data-label="Recomendado até"><span class="baixo">80 mega</span></td>
-            <td data-label="Máximo aceitável"><span class="baixo">100 mega</span></td>
-            <td data-label="Observação" class="obs">Não indicado para planos acima de 100 mega.</td>
-            <tr data-linha="Ubiquiti" data-modelo="Ubiquiti UniFi AP Access Point alto fluxo muitos dispositivos Wi-Fi profissional">
-  <td data-label="Foto" class="foto-cell">
-    <img
-      class="foto-equipamento"
-      src="imagens/ubiquiti-unifi-ap.jpg"
-      alt="Ubiquiti UniFi AP"
-      data-titulo="Ubiquiti UniFi AP"
-      onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
-    />
-  </td>
+            <td data-label="Portas">Fast 100 Mbps</td>
+            <td data-label="Plano indicado"><span class="plano plano-100">80 mega</span></td>
+          </tr>
 
-  <td data-label="Linha">
-    <span class="tag tag-ubiquiti">Ubiquiti</span>
-  </td>
+          <tr data-linha="Ubiquiti" data-modelo="Ubiquiti UniFi AP Access Point alto fluxo muitos dispositivos Wi-Fi profissional">
+            <td data-label="Foto" class="foto-cell">
+              <img class="foto-equipamento" src="imagens/ubiquiti-unifi-ap.jpg" alt="Ubiquiti UniFi AP" data-titulo="Ubiquiti UniFi AP" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
+            </td>
+            <td data-label="Linha"><span class="tag tag-ubiquiti">Ubiquiti</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>UniFi / Access Point</strong>
+                <small>AP para alto fluxo</small>
+              </div>
+            </td>
+            <td data-label="Uso indicado"><span class="uso uso-alto-fluxo">Alto fluxo</span></td>
+            <td data-label="Tecnologia">Depende do modelo</td>
+            <td data-label="Portas">Gigabit</td>
+            <td data-label="Plano indicado"><span class="plano plano-fluxo">Alto fluxo</span></td>
+          </tr>
 
-  <td data-label="Modelo">
-    <div class="modelo-box">
-      <strong>UniFi / Access Point</strong>
-      <small>AP para alto fluxo</small>
-    </div>
-  </td>
+          <tr data-linha="Infraestrutura" data-modelo="Switch 5 portas 8 portas 16 portas infraestrutura rede fast ethernet gigabit">
+            <td data-label="Foto" class="foto-cell">
+              <img class="foto-equipamento" src="imagens/switch-5-portas.jpg" alt="Switch 5 portas ou superior" data-titulo="Switch 5 portas ou superior" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
+            </td>
+            <td data-label="Linha"><span class="tag tag-infraestrutura">Infra</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>Switch 5 portas ou superior</strong>
+                <small>Distribuição de rede cabeada</small>
+              </div>
+            </td>
+            <td data-label="Uso indicado"><span class="uso uso-infra">Infraestrutura</span></td>
+            <td data-label="Tecnologia">Gigabit</td>
+            <td data-label="Portas">5 portas ou mais</td>
+            <td data-label="Plano indicado"><span class="plano plano-fluxo">Depende do modelo</span></td>
+          </tr>
 
-  <td data-label="Tecnologia">
-    Depende do modelo
-  </td>
-
-  <td data-label="Portas">
-    Gigabit
-  </td>
-
-  <td data-label="Recomendado até">
-    <span class="mega">Alto fluxo</span>
-  </td>
-
-  <td data-label="Máximo aceitável">
-    <span class="maximo">Depende do projeto</span>
-  </td>
-
-  <td data-label="Observação" class="obs">
-    Indicado para empresas, comércios, eventos, pousadas, escolas e locais com muitos dispositivos conectados.
-    O UniFi atua como ponto de acesso Wi-Fi e precisa de um roteador principal, como uma MikroTik RB para fazer gerencimento da rede.
-  </td>
-</tr>
+          <tr data-linha="Infraestrutura" data-modelo="Conversor de fibra optica fibra óptica fast ethernet gigabit infraestrutura">
+            <td data-label="Foto" class="foto-cell">
+              <img class="foto-equipamento" src="imagens/conversor-fibra.jpg" alt="Conversor de Fibra Óptica" data-titulo="Conversor de Fibra Óptica" onerror="this.onerror=null; this.src='imagens/sem-foto.png';" />
+            </td>
+            <td data-label="Linha"><span class="tag tag-infraestrutura">Infra</span></td>
+            <td data-label="Modelo">
+              <div class="modelo-box">
+                <strong>Conversor de Fibra Óptica</strong>
+                <small>Conversor óptico / ethernet</small>
+              </div>
+            </td>
+            <td data-label="Uso indicado"><span class="uso uso-infra">Infraestrutura</span></td>
+            <td data-label="Tecnologia">Fast ou Gigabit</td>
+            <td data-label="Portas">Fibra + Ethernet</td>
+            <td data-label="Plano indicado"><span class="plano plano-fluxo">Gigabit</span></td>
           </tr>
         </tbody>
       </table>
@@ -1056,12 +1388,18 @@
     <section class="legenda">
       <h2>Resumo para vendedores</h2>
       <ul>
-        <li><strong>Plano acima de 100 mega:</strong> precisa de roteador ou ONT com porta Gigabit.</li>
+        <li><strong>Plano indicado:</strong> é a referência mais segura para venda naquele equipamento.</li>
+        <li><strong>Plano acima de 100 mega:</strong> precisa de roteador, ONT, switch ou conversor com porta Gigabit.</li>
+        <li><strong>Planos até 100 mega:</strong> mesmo quando o roteador é Fast Ethernet, o ideal é que seja dual band. Equipamentos apenas 2.4 GHz podem sofrer interferência e entregar resultado abaixo do esperado no Wi-Fi.</li>
         <li><strong>Plano acima de 500 mega:</strong> preferir equipamento Wi-Fi 6.</li>
-        <li><strong>Cliente reclama de Wi-Fi:</strong> verificar distância, paredes, interferência e quantidade de dispositivos.</li>
+        <li><strong>Teste de velocidade:</strong> o ideal é testar via cabo, com apenas um dispositivo conectado na rede.</li>
+        <li><strong>Dispositivo do cliente:</strong> celular, notebook, placa de rede ou cabo antigo podem limitar o resultado do teste.</li>
+        <li><strong>Wi-Fi:</strong> velocidade pode variar por distância, paredes, interferência e quantidade de dispositivos conectados.</li>
         <li><strong>Mesh:</strong> melhora cobertura, mas pode reduzir velocidade se os pontos estiverem conectados apenas via Wi-Fi.</li>
-        <li><strong>Para atingir 1 giga:</strong> o teste ideal deve ser feito via cabo em equipamento compatível com placa Gigabit.</li>
-        <li><strong>Ubiquiti / UniFi:</strong> indicado para ambientes com muitos dispositivos e alto fluxo. Ele atua como ponto de acesso Wi-Fi e precisa de uma RB principal.</li>
+        <li><strong>Para atingir 1 giga:</strong> o teste deve ser feito via cabo, com placa de rede Gigabit e cabo adequado.</li>
+        <li><strong>Ubiquiti / UniFi:</strong> indicado para ambientes com muitos dispositivos e alto fluxo. Não substitui a RB/roteador principal.</li>
+        <li><strong>Switch:</strong> verificar se é Fast Ethernet 10/100 ou Gigabit. Switch 10/100 limita planos acima de 100 mega.</li>
+        <li><strong>Conversor de fibra:</strong> verificar se é 10/100 ou Gigabit. Conversor 10/100 também limita a velocidade em até 100 mega.</li>
       </ul>
     </section>
   </main>
