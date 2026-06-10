@@ -49,6 +49,25 @@
       padding: 34px 18px;
       text-align: center;
     }
+    .header-conteudo {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  text-align: left;
+}
+
+.logo-viatec {
+  width: 130px;
+  max-height: 80px;
+  object-fit: contain;
+  background: white;
+  padding: 10px;
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+}
 
     header h1 {
       font-size: 30px;
@@ -496,6 +515,16 @@
 
       .modal-topo h2 {
         font-size: 17px;
+        .header-conteudo {
+  flex-direction: column;
+  text-align: center;
+  gap: 14px;
+}
+
+.logo-viatec {
+  width: 120px;
+  max-height: 75px;
+}
       }
     }
 
@@ -550,12 +579,23 @@
 </head>
 
 <body>
-  <header>
-    <h1>Capacidade de Roteadores e ONTs</h1>
-    <p>
-      Consulta rápida para vendedores e técnicos verificarem qual plano de internet é recomendado para cada equipamento.
-    </p>
-  </header>
+<header>
+  <div class="header-conteudo">
+    <img 
+      src="imagens/logo-viatec.png" 
+      alt="Logo ViaTec" 
+      class="logo-viatec"
+      onerror="this.style.display='none';"
+    />
+
+    <div>
+      <h1>Capacidade de Roteadores e ONTs</h1>
+      <p>
+        Consulta rápida para vendedores e técnicos verificarem qual plano de internet é recomendado para cada equipamento.
+      </p>
+    </div>
+  </div>
+</header>
 
   <main class="container">
     <div class="alerta">
