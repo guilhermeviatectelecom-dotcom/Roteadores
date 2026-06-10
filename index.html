@@ -256,6 +256,10 @@
       background: #dcfce7;
       color: #15803d;
     }
+    .tag-ubiquiti {
+  background: #e0f2fe;
+  color: #0369a1;
+}
 
     .mega {
       font-weight: bold;
@@ -643,6 +647,7 @@
         <option value="TP-Link">TP-Link</option>
         <option value="MikroTik">MikroTik</option>
         <option value="Intelbras">Intelbras</option>
+        <option value="Ubiquiti">Ubiquiti</option>
       </select>
     </section>
 
@@ -996,6 +1001,50 @@
             <td data-label="Recomendado até"><span class="baixo">80 mega</span></td>
             <td data-label="Máximo aceitável"><span class="baixo">100 mega</span></td>
             <td data-label="Observação" class="obs">Não indicado para planos acima de 100 mega.</td>
+            <tr data-linha="Ubiquiti" data-modelo="Ubiquiti UniFi AP Access Point alto fluxo muitos dispositivos Wi-Fi profissional">
+  <td data-label="Foto" class="foto-cell">
+    <img
+      class="foto-equipamento"
+      src="imagens/ubiquiti-unifi-ap.jpg"
+      alt="Ubiquiti UniFi AP"
+      data-titulo="Ubiquiti UniFi AP"
+      onerror="this.onerror=null; this.src='imagens/sem-foto.png';"
+    />
+  </td>
+
+  <td data-label="Linha">
+    <span class="tag tag-ubiquiti">Ubiquiti</span>
+  </td>
+
+  <td data-label="Modelo">
+    <div class="modelo-box">
+      <strong>UniFi / Access Point</strong>
+      <small>AP para alto fluxo</small>
+    </div>
+  </td>
+
+  <td data-label="Tecnologia">
+    Depende do modelo
+  </td>
+
+  <td data-label="Portas">
+    Gigabit
+  </td>
+
+  <td data-label="Recomendado até">
+    <span class="mega">Alto fluxo</span>
+  </td>
+
+  <td data-label="Máximo aceitável">
+    <span class="maximo">Depende do projeto</span>
+  </td>
+
+  <td data-label="Observação" class="obs">
+    Indicado para empresas, comércios, eventos, pousadas, escolas e locais com muitos dispositivos conectados.
+    O UniFi normalmente atua como ponto de acesso Wi-Fi e precisa de um roteador/gateway principal, como uma MikroTik RB,
+    ONU roteada ou firewall, para fazer PPPoE, NAT, DHCP e regras de rede.
+  </td>
+</tr>
           </tr>
         </tbody>
       </table>
@@ -1013,6 +1062,7 @@
         <li><strong>Cliente reclama de Wi-Fi:</strong> verificar distância, paredes, interferência e quantidade de dispositivos.</li>
         <li><strong>Mesh:</strong> melhora cobertura, mas pode reduzir velocidade se os pontos estiverem conectados apenas via Wi-Fi.</li>
         <li><strong>Para atingir 1 giga:</strong> o teste ideal deve ser feito via cabo em equipamento compatível com placa Gigabit.</li>
+        <li><strong>Ubiquiti / UniFi:</strong> indicado para ambientes com muitos dispositivos e alto fluxo. ele trabalha como ponto de acesso Wi-Fi e precisa de uma RB principal fazendo PPPoE, NAT, DHCP e firewall.</li>
       </ul>
     </section>
   </main>
